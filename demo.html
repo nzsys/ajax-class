@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax</title>
+	<script src="ajax.class.js"></script>
+</head>
+<body>
+	test
+	<script>
+		new Ajax({
+			method : 'POST',
+			url    : 'post.php',
+			data   : {key:1}
+		}, done = (data) =>  {
+			console.log(data)
+		}, fail = (data) => {
+			alert(data.status)
+		}, always = (data) => {
+
+		})
+	</script>
+</body>
+</html>
