@@ -1,16 +1,15 @@
 const READYSTATE_COMPLETED = 4
 const HTTP_STATUS_OK = 200
 
-class Ajax
-{
+class Ajax {
 	constructor(options, done = {}, fail = {}, always = {}) {
-		this.url    = options.url
+		this.url = options.url
 		this.method = options.method.toUpperCase()
-		this.data   = options.data
+		this.data = options.data
 		this.request(done, fail, always)
 	}
 
-	request(done = {}, fail = {}, always = {}){
+	request(done = {}, fail = {}, always = {}) {
 		let request = new XMLHttpRequest()
 		request.open(this.method, this.url)
 		request.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
@@ -41,15 +40,15 @@ class Ajax
 						}
 						if (done) {
 							return done(params.response.string);
-						} 
+						}
 					} else {
 						if (fail) {
-							return fail(params);
+							return fail(request);
 						}
 					}
 				}
 				if (always) {
-					return always(params);
+					return always(request);
 				}
 			} catch (e) {
 				console.error(e)
@@ -57,11 +56,11 @@ class Ajax
 		}
 	}
 
-	encode(data){
+	encode(data) {
 		var param = []
-		for(var key in data){
+		for (var key in data) {
 			param.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
 		}
-		return param.join('&').replace(/%20/g,'+')
+		return param.join('&').replace(/%20/g, '+')
 	}
 }
