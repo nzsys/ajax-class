@@ -8,7 +8,7 @@ class Ajax
 		this.method = options.method.toUpperCase()
 		this.data   = options.data
 		this.request(done, fail, always)
-    }
+	}
 
 	request(done = {}, fail = {}, always = {}){
 		let request = new XMLHttpRequest()
@@ -39,19 +39,17 @@ class Ajax
 								headers: request.getAllResponseHeaders()
 							}
 						}
-						
-						if (params.status === HTTP_STATUS_OK && done) {
+						if (done) {
 							return done(params.response.string);
-						}
-						else if (params.status !== HTTP_STATUS_OK && fail) {
+						} 
+					} else {
+						if (fail) {
 							return fail(params);
 						}
-						if(always) {
-							return always(params);
-						}
-					} else {
-						console.error('Error status: ' + request.status)
 					}
+				}
+				if (always) {
+					return always(params);
 				}
 			} catch (e) {
 				console.error(e)
