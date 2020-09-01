@@ -60,7 +60,7 @@ class Ajax {
 			}
 		}).then( (string) => {
 			if (always) {
-				return always()
+				return always(string)
 			}
 		})
 		
